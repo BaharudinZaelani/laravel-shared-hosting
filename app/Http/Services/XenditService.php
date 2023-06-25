@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use Xendit\Balance;
 use Xendit\Xendit;
+use Xendit\PaymentChannels;
 
 class XenditService {
 
@@ -17,6 +18,13 @@ class XenditService {
      */
     public static function getBalance() {
         XenditService::start();
-        return Balance::getBalance("CASH");
+        return Balance::getBalance("CASH", [
+            "currency" => "IDR"
+        ]);
+    }
+
+    public static function getPayment() {
+        XenditService::start();
+        return PaymentChannels::list();
     }
 }
